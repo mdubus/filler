@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:39:10 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/11 15:43:24 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/11 19:21:19 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,83 +15,46 @@
 int	try_put_piece(t_filler *f, int x, int y);
 int	try_put_piece(t_filler *f, int x, int y)
 {
+	dprintf(f->ttys, "coucou\n");
 	int	score;
 
 	score = 0;
-	int	i;
-	int	j;
-
-	i = f->x_distance;
-	j = f->y_distance;
-	if (i + 1 < f->w_piece)
-		i++;
-	else if (j + 1 < f->h_piece)
-	{
-		i = 0;
-		j++;
-	}
-	else
+	search_next_star(f, &f->i, &f->j);
+	if (f->i == f->w_piece && f->j == f->h_piece)
 		return (1);
 
-	while (j < f->h_piece && f->piece[j][i] != '*')
+	while (f->j < f->h_piece)
 	{
-		while (i < f->w_piece && f->piece[j][i] != '*')
-		{
-			i++;
-		}
-		if (f->piece[j][i] != '*')
-		{
-			i = 0;
-			j++;
-		}
-	}
-
-
-
-
-
-	while (j < f->h_piece)
-	{
-		while (i < f->w_piece)
+		while (f->i < f->w_piece)
 		{
 			if(HMAP == ME || HMAP == EN)
 				return (1);
-			else if (f->piece[j][i] == '*')
+			else if (f->piece[f->j][f->i] == '*')
 				score += HMAP;
-			i++;
+			f->i++;
 		}
-		i = 0;
-		j++;
+		f->i = 0;
+		f->j++;
 	}
 	if (f->score == 0 || score < f->score)
+	{
 		f->score = score;
+		f->tempx = x;
+		f->tempy = y;
+	}
 	dprintf(f->ttys, "\nScore = %d\n", f->score);
 	return (0);
-}
-
-void	search_me(t_filler *f);
-void	search_me(t_filler *f)
-{
-	while (f->y_me < f->h_board && f->hmap[f->y_me][f->x_me] != ME)
-	{
-		while (f->x_me < f->w_board && f->hmap[f->y_me][f->x_me] != ME)
-		{
-			f->x_me++;
-		}
-		if (f->x_me == f->w_board)
-		{
-			f->x_me = 0;
-			f->y_me++;
-		}
-	}
-	dprintf(f->ttys, "\nxme = %d, yme = %d\n", f->x_me, f->y_me);
 }
 
 void	resolve(t_filler *f);
 void	resolve(t_filler *f)
 {
-	search_me(f);
-	try_put_piece(f, f->x_me, f->y_me);
+	search_first_me(f);
+//	search_next_me(f);
+	search_first_star(f);
+	//	f->i = f->x_distance;
+	//	f->j = f->y_distance;
+	try_put_piece(f, f->x, f->y);
 }
 
 int	main(void)

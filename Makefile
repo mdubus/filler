@@ -26,7 +26,8 @@ SRCDIR		=	srcs
 SRC			=	main.c init_struct_filler.c free_tab_char.c get_player_info.c\
 				useful.c get_map_info.c search_ennemy.c create_heat_map.c\
 				init_heat_map.c do_heat_map.c get_piece.c stock_piece.c\
-				get_distance_piece_form.c
+				get_distance_piece_form.c search_first_next_me.c\
+				search_first_next_star.c
 
 OBJ			= $(SRC:.c=.o)
 SRCS		=	$(addprefix $(SRCDIR)/, $(SRC))
