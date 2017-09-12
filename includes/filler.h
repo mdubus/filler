@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:51:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/11 19:42:45 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/12 15:42:27 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PM f->hmap[y + 1][x - 1]
 # define ME -2
 # define EN -1
-# define HMAP f->hmap[y + f->j - f->y_distance][x + f->i - f->x_distance]
+# define HMAP f->hmap[y + j - f->y_distance][x + i - f->x_distance]
 
 typedef struct	s_filler
 {
@@ -59,6 +59,8 @@ typedef struct	s_filler
 	int			score;
 	int			i;
 	int			j;
+	int			startx;
+	int			starty;
 	int			padding3;
 }				t_filler;
 

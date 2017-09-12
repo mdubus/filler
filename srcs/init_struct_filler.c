@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 15:24:35 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/11 18:42:09 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/12 15:31:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_struct_filler(t_filler *f)
 	f->x = 0;
 	f->y = 0;
 	f->ret = -1;
-	f->ttys = open("/dev/ttys001", O_RDWR);
+	f->ttys = open("/dev/ttys000", O_RDWR);
 	f->w_board = -1;
 	f->h_board = -1;
 	f->w_piece = -1;
@@ -38,6 +38,8 @@ void	init_struct_filler(t_filler *f)
 	f->tempx = 0;
 	f->tempy = 0;
 	f->score = 0;
-	f->i = 0;
+	f->i = -1;
 	f->j = 0;
+	f->startx = 0;
+	f->starty = 0;
 }

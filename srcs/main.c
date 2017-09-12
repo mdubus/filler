@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:39:10 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/11 19:21:19 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/12 19:29:41 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,40 @@
 int	try_put_piece(t_filler *f, int x, int y);
 int	try_put_piece(t_filler *f, int x, int y)
 {
-	dprintf(f->ttys, "coucou\n");
 	int	score;
+	int	i;
+	int	j;
 
 	score = 0;
-	search_next_star(f, &f->i, &f->j);
-	if (f->i == f->w_piece && f->j == f->h_piece)
-		return (1);
+	i = 0;
+	j = 0;
+	
+	dprintf(f->ttys, "\nTRY !\n");
 
-	while (f->j < f->h_piece)
+	//	search_next_star(f, &f->i, &f->j);
+	if (i == f->w_piece && j == f->h_piece)
+		return (1);
+	while (j < f->h_piece)
 	{
-		while (f->i < f->w_piece)
+		while (i < f->w_piece)
 		{
-			if(HMAP == ME || HMAP == EN)
-				return (1);
-			else if (f->piece[f->j][f->i] == '*')
-				score += HMAP;
-			f->i++;
+			if (f->piece[j][i] == '*' && (y + j - f->y_distance) >= 0 &&
+					(y + j - f->y_distance) < f->h_board &&
+					(x + i - f->x_distance) >= 0 &&
+					(x + i - f->x_distance) < f->w_board)
+			{
+				if (HMAP == ME || HMAP == EN)
+				{
+					if (i != f->startx && j != f->starty)
+						return (1);
+				}
+				else
+					score += HMAP;
+			}
+			i++;
 		}
-		f->i = 0;
-		f->j++;
+		i = 0;
+		j++;
 	}
 	if (f->score == 0 || score < f->score)
 	{
@@ -42,19 +56,52 @@ int	try_put_piece(t_filler *f, int x, int y)
 		f->tempx = x;
 		f->tempy = y;
 	}
-	dprintf(f->ttys, "\nScore = %d\n", f->score);
+	dprintf(f->ttys, "\nScore = %d\n\n", f->score);
 	return (0);
 }
 
 void	resolve(t_filler *f);
 void	resolve(t_filler *f)
-{
+{/*
 	search_first_me(f);
-//	search_next_me(f);
-	search_first_star(f);
-	//	f->i = f->x_distance;
-	//	f->j = f->y_distance;
-	try_put_piece(f, f->x, f->y);
+	//	search_next_me(f);
+//		dprintf(f->ttys, "\ni = %d, j = %d\n", f->i, f->j);
+//		dprintf(f->ttys, "w_piece = %d, h_piece = %d\n", f->w_piece, f->h_piece);
+	while ((f->i + 1 < f->w_piece && f->j + 1 < f->h_piece))
+	{
+		dprintf(f->ttys, "\nw_piece = %d, h_piece = %d", f->w_piece, f->h_piece);
+		search_next_star(f, &f->i, &f->j);
+		dprintf(f->ttys, "\ni = %d, j = %d", f->i, f->j);
+		f->startx = f->i;
+		f->starty = f->j;
+		//	dprintf(f->ttys, "distx = %d, disty = %d\n", f->x_distance, f->y_distance);
+		//	dprintf(f->ttys, "i = %d, j = %d\n", f->i, f->j);
+		try_put_piece(f, f->x, f->y);
+	}
+	if (f->piece[f->j][f->i] == '*')
+	{
+		search_next_star(f, &f->i, &f->j);
+		try_put_piece(f, f->x, f->y);
+	}
+*/
+	f->i = 0;
+	f->j = 0;
+	while (f->i < f->w_piece && f->j < f->h_piece)
+	{
+		if (f->piece[f->j][f->i] == '*')
+		{
+			try_put_piece(f, f->x, f->y);
+		}
+		f->i++;
+		if (f->i >= f->w_piece)
+		{
+			f->i = 0;
+			f->j++;
+		}
+
+//		search_next_star(f, &f->i, &f->j);
+		dprintf(f->ttys, "\ni = %d, j = %d\n", f->i, f->j);
+	}
 }
 
 int	main(void)
@@ -90,8 +137,8 @@ int	main(void)
 	//	print_map(&f);
 	//	dprintf(f.ttys, "x = %d, y = %d\n", f.x_ennemy, f.y_ennemy);
 
-	dprintf(f.ttys, "\nHeat Max = %d\n", f.nb_max);
-	dprintf(f.ttys, "me = -2, ennemy = -1\n");
+	//	dprintf(f.ttys, "\nHeat Max = %d\n", f.nb_max);
+	//	dprintf(f.ttys, "me = -2, ennemy = -1\n");
 	print_heat_map(&f);
 	printf("8 2\n");
 	//	}
