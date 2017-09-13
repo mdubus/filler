@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:39:10 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/12 19:29:41 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/13 10:49:07 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ int	try_put_piece(t_filler *f, int x, int y)
 	score = 0;
 	i = 0;
 	j = 0;
-	
-	dprintf(f->ttys, "\nTRY !\n");
-
-	//	search_next_star(f, &f->i, &f->j);
 	if (i == f->w_piece && j == f->h_piece)
 		return (1);
 	while (j < f->h_piece)
@@ -62,28 +58,8 @@ int	try_put_piece(t_filler *f, int x, int y)
 
 void	resolve(t_filler *f);
 void	resolve(t_filler *f)
-{/*
+{
 	search_first_me(f);
-	//	search_next_me(f);
-//		dprintf(f->ttys, "\ni = %d, j = %d\n", f->i, f->j);
-//		dprintf(f->ttys, "w_piece = %d, h_piece = %d\n", f->w_piece, f->h_piece);
-	while ((f->i + 1 < f->w_piece && f->j + 1 < f->h_piece))
-	{
-		dprintf(f->ttys, "\nw_piece = %d, h_piece = %d", f->w_piece, f->h_piece);
-		search_next_star(f, &f->i, &f->j);
-		dprintf(f->ttys, "\ni = %d, j = %d", f->i, f->j);
-		f->startx = f->i;
-		f->starty = f->j;
-		//	dprintf(f->ttys, "distx = %d, disty = %d\n", f->x_distance, f->y_distance);
-		//	dprintf(f->ttys, "i = %d, j = %d\n", f->i, f->j);
-		try_put_piece(f, f->x, f->y);
-	}
-	if (f->piece[f->j][f->i] == '*')
-	{
-		search_next_star(f, &f->i, &f->j);
-		try_put_piece(f, f->x, f->y);
-	}
-*/
 	f->i = 0;
 	f->j = 0;
 	while (f->i < f->w_piece && f->j < f->h_piece)
@@ -98,9 +74,6 @@ void	resolve(t_filler *f)
 			f->i = 0;
 			f->j++;
 		}
-
-//		search_next_star(f, &f->i, &f->j);
-		dprintf(f->ttys, "\ni = %d, j = %d\n", f->i, f->j);
 	}
 }
 
