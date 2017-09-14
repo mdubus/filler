@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 19:19:28 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/12 18:00:45 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/14 15:12:46 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void	search_next_me(t_filler *f)
 				f->y++;
 			}
 		}
-		dprintf(f->ttys, "\nxme = %d, yme = %d\n", f->x, f->y);
+//		dprintf(f->ttys, "\nxme = %d, yme = %d\n", f->x, f->y);
 	}
 }

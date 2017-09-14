@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 13:36:56 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/08 15:44:51 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/14 21:29:49 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int						ft_strisupper(char *str);
 void					ft_striter(char *s, void (*f)(char *));
 void					ft_striteri(char *s, void (*f)(unsigned int, char *));
 char					*ft_strjoin(char const *s1, char const *s2);
+char					*ft_strjoin_proper(char *s1, int free1, char *s2,
+						int free2);
 size_t					ft_strlcat(char *dst, const char *src, size_t size);
 size_t					ft_strlen(const char *s);
 size_t					ft_strlen_secure(const char *s);
