@@ -6,30 +6,59 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 19:20:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/12 15:22:01 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/20 17:05:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-void	search_first_star(t_filler *f)
+static int	flag_star(t_filler *f, int *i, int *j)
 {
-	f->i = 0;
-	f->j = 0;
-	while (f->j < f->h_piece && f->piece[f->j][f->i] != '*')
+	if (f->flag_star == 1)
 	{
-		while (f->i < f->w_piece && f->piece[f->j][f->i] != '*')
+		f->flag_star = 0;
+		if (*i + 1 < f->w_piece)
+			(*i)++;
+		else if (*j + 1 < f->h_piece)
 		{
-			f->i++;
+			*i = 0;
+			(*j)++;
 		}
-		if (f->piece[f->j][f->i] != '*')
-		{
-			f->i = 0;
-			f->j++;
-		}
+		else
+			return (0);
 	}
+	return (1);
 }
 
+int			search_next_star(t_filler *f, int *i, int *j)
+{
+	if (flag_star(f, i, j) == 0)
+		return (0);
+	if (*i == 0 && *j == 0 && f->piece[*j][*i] == '*')
+	{
+		f->flag_star = 1;
+		return (1);
+	}
+	else
+	{
+		while (*j < f->h_piece)
+		{
+			while (*i < f->w_piece)
+			{
+				if (f->piece[*j][*i] == '*')
+				{
+					f->flag_star = 1;
+					return (1);
+				}
+				(*i)++;
+			}
+			*i = 0;
+			(*j)++;
+		}
+	}
+	return (0);
+}
+/*
 void	search_next_star(t_filler *f, int *i, int *j)
 {
 	if (*i + 1 < f->w_piece)
@@ -54,4 +83,4 @@ void	search_next_star(t_filler *f, int *i, int *j)
 			}
 		}
 	}
-}
+}*/

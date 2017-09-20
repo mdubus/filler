@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:51:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/12 15:42:27 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/20 17:02:10 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct	s_filler
 	int			j;
 	int			startx;
 	int			starty;
-	int			padding3;
+	int			flag_star;
 }				t_filler;
 
 
@@ -84,8 +84,7 @@ void	stock_piece(t_filler *f);
 void	get_distance_piece_form(t_filler *f);
 void	search_first_me(t_filler *f);
 void	search_next_me(t_filler *f);
-void	search_first_star(t_filler *f);
-void	search_next_star(t_filler *f, int *i, int *j);
+int		search_next_star(t_filler *f, int *i, int *j);
 
 
 

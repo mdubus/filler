@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 16:21:15 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/10 13:55:00 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/20 11:37:22 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void	print_piece(t_filler *f)
 	i = 0;
 	while (i < f->h_piece)
 		dprintf(f->ttys, "\n%s", f->piece[i++]);
+	dprintf(f->ttys, "\n");
 }
