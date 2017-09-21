@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 19:20:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/20 17:05:25 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/21 17:12:38 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,3 @@ int			search_next_star(t_filler *f, int *i, int *j)
 	}
 	return (0);
 }
-/*
-void	search_next_star(t_filler *f, int *i, int *j)
-{
-	if (*i + 1 < f->w_piece)
-		(*i)++;
-	else if (*j + 1 < f->h_piece)
-	{
-		*i = 0;
-		(*j)++;
-	}
-	if (*j < f->h_piece && *i < f->w_piece)
-	{
-		while (*j < f->h_piece && f->piece[*j][*i] != '*')
-		{
-			while (*i < f->w_piece && f->piece[*j][*i] != '*')
-			{
-				(*i)++;
-			}
-			if (f->piece[*j][*i] != '*')
-			{
-				*i = 0;
-				(*j)++;
-			}
-		}
-	}
-}*/

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 16:21:15 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/20 11:37:22 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/21 17:12:57 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	compare_return_error(char *s1, char *s2, int fd)
 	if (ft_strcmp(s1, s2) != 0)
 		ft_print_error_fd_exit(ft_putstr_fd, "Error", fd);
 }
-
+/*
 void	print_map(t_filler *f)
 {
 	int i;
@@ -60,4 +60,4 @@ void	print_piece(t_filler *f)
 	while (i < f->h_piece)
 		dprintf(f->ttys, "\n%s", f->piece[i++]);
 	dprintf(f->ttys, "\n");
-}
+}*/
