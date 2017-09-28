@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 10:11:06 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/10 13:53:59 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/23 17:26:32 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 static void	put_heat(t_filler *f, int i, int x, int y)
 {
-	if (x + 1 < f->w_board && PX1 == i && PX1 != ME)
-		HEAT = i + 1;
-	if (y + 1 < f->h_board && PY1 == i && PY1 != ME)
-		HEAT = i + 1;
-	if (x + 1 < f->w_board && y + 1 < f->h_board && PP == i && PP != ME)
-		HEAT = i + 1;
-	if (x + 1 < f->w_board && y - 1 >= 0 && MP == i && MP != ME)
-		HEAT = i + 1;
-	if (x - 1 >= 0 && MX1 == i && MX1 != ME)
-		HEAT = i + 1;
-	if (y - 1 >= 0 && MY1 == i && MY1 != ME)
-		HEAT = i + 1;
-	if (x - 1 >= 0 && y - 1 >= 0 && MM == i && MM != ME)
-		HEAT = i + 1;
-	if (x - 1 >= 0 && y + 1 < f->h_board && PM == i && PM != ME)
-		HEAT = i + 1;
+	if (x + 1 < f->w_board && f->hmap[y][x + 1] == i && f->hmap[y][x + 1] != ME)
+		f->hmap[y][x] = i + 1;
+	if (y + 1 < f->h_board && f->hmap[y + 1][x] == i && f->hmap[y + 1][x] != ME)
+		f->hmap[y][x] = i + 1;
+	if (x + 1 < f->w_board && y + 1 < f->h_board &&
+			f->hmap[y + 1][x + 1] == i && f->hmap[y + 1][x + 1] != ME)
+		f->hmap[y][x] = i + 1;
+	if (x + 1 < f->w_board && y - 1 >= 0 && f->hmap[y - 1][x + 1] == i &&
+			f->hmap[y - 1][x + 1] != ME)
+		f->hmap[y][x] = i + 1;
+	if (x - 1 >= 0 && f->hmap[y][x - 1] == i && f->hmap[y][x - 1] != ME)
+		f->hmap[y][x] = i + 1;
+	if (y - 1 >= 0 && f->hmap[y - 1][x] == i && f->hmap[y - 1][x] != ME)
+		f->hmap[y][x] = i + 1;
+	if (x - 1 >= 0 && y - 1 >= 0 && f->hmap[y - 1][x - 1] == i &&
+			f->hmap[y - 1][x - 1] != ME)
+		f->hmap[y][x] = i + 1;
+	if (x - 1 >= 0 && y + 1 < f->h_board && f->hmap[y + 1][x - 1] == i &&
+			f->hmap[y + 1][x - 1] != ME)
+		f->hmap[y][x] = i + 1;
 }
 
-void	do_heat_map(t_filler *f)
+void		do_heat_map(t_filler *f)
 {
 	int	x;
 	int	y;
@@ -47,7 +51,7 @@ void	do_heat_map(t_filler *f)
 		{
 			while (x < f->w_board)
 			{
-				if (HEAT == 0)
+				if (f->hmap[y][x] == 0)
 					put_heat(f, i, x, y);
 				x++;
 			}
@@ -57,25 +61,5 @@ void	do_heat_map(t_filler *f)
 		x = 0;
 		y = 0;
 		i++;
-	}
-}
-
-void	search_heat_max(t_filler *f)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (y < f->h_board)
-	{
-		while (x < f->w_board)
-		{
-			if (f->hmap[y][x] > f->nb_max)
-				f->nb_max = f->hmap[y][x];
-			x++;
-		}
-		x = 0;
-		y++;
 	}
 }

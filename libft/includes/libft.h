@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 13:36:56 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/14 21:29:49 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/28 14:19:30 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void					ft_print_error_exit(void (*function)(const char *),
 int						ft_nb_occur_char_in_str(char *str, char *search);
 void					ft_print_error_fd_exit(void (*function)(const char *,
 						int fd), const char *str, int fd);
+void					ft_free_tab_char(char ***tab);
 
 /*
 ** ----------------------------- is something ----------------------------- **

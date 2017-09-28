@@ -1,36 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stock_piece.c                                      :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/10 11:39:52 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/14 21:33:09 by mdubus           ###   ########.fr       */
+/*   Created: 2017/09/23 15:39:52 by mdubus            #+#    #+#             */
+/*   Updated: 2017/09/28 14:18:55 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-void	stock_piece(t_filler *f)
+static void	free_tab(t_filler *f)
 {
 	int		i;
-	char	*temp;
-	
+
 	i = 0;
-	temp = NULL;
+	while (i < f->h_board)
+		free(f->map[i++]);
+	free(f->map);
+}
+
+static void	free_hmap(t_filler *f)
+{
+	int i;
+
+	i = 0;
+	while (i < f->h_board)
+		free(f->hmap[i++]);
+	free(f->hmap);
+}
+
+static void	free_piece(t_filler *f)
+{
+	int	i;
+
+	i = 0;
 	while (i < f->h_piece)
-	{
-		if (get_next_line_backslash(STDIN_FILENO, &f->line) != 1)
-			ft_print_error_fd_exit(ft_putstr_fd, "Error 8", f->ttys);
-		if (temp == NULL)
-		{
-			temp = ft_strdup(f->line);
-			free(f->line);
-		}
-		else
-			temp = ft_strjoin_proper(temp, 1, f->line, 1);
-		i++;
-	}
-	f->piece = ft_strsplit(temp, '\n');
+		free(f->piece[i++]);
+	free(f->piece);
+}
+
+void		free_all(t_filler *f)
+{
+	free_tab(f);
+	free_hmap(f);
+	free_piece(f);
 }

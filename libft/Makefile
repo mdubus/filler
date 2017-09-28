@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:19:44 by mdubus            #+#    #+#              #
-#    Updated: 2017/09/14 21:30:11 by mdubus           ###   ########.fr        #
+#    Updated: 2017/09/28 14:19:43 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SRC =	ft_absolute.c ft_absolute_double.c ft_atoi.c ft_atoi_base.c\
 		ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtoupper.c\
 		ft_strtrim.c ft_swap_adress.c ft_tolower.c ft_toupper.c\
 		get_next_line_backslash.c ft_nb_occur_char_in_str.c\
-		ft_print_error_fd_exit.c ft_strjoin_proper.c
+		ft_print_error_fd_exit.c ft_strjoin_proper.c ft_free_tab_char.c
 
 OBJ = $(SRC:.c=.o)
 

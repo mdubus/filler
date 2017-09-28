@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:51:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/21 18:35:40 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/23 17:27:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@
 #include <stdio.h>
 #include "../libft/includes/libft.h"
 
-# define HEAT f->hmap[y][x]
-# define PX1 f->hmap[y][x + 1]
-# define PY1 f->hmap[y + 1][x]
-# define MX1 f->hmap[y][x - 1]
-# define MY1 f->hmap[y - 1][x]
-# define PP f->hmap[y + 1][x + 1]
-# define MM f->hmap[y - 1][x - 1]
-# define MP f->hmap[y - 1][x + 1]
-# define PM f->hmap[y + 1][x - 1]
 # define ME -2
 # define EN -1
 
@@ -73,14 +64,16 @@ void	print_heat_map(t_filler *f);
 void	create_heat_map(t_filler *f);
 void	init_heat_map(t_filler *f);
 void	do_heat_map(t_filler *f);
-void	search_heat_max(t_filler *f);
 void	get_piece(t_filler *f);
 void	print_piece(t_filler *f);
 void	stock_piece(t_filler *f);
-void	search_first_me(t_filler *f);
-void	search_next_me(t_filler *f);
 int		search_next_star(t_filler *f, int *i, int *j);
-
+int		count_score(t_filler *f, int i, int j, int *score);
+int		count_before(t_filler *f, int j, int i, int *score);
+int		count_after(t_filler *f, int j, int i, int *score);
+void	free_all(t_filler *f);
+void	free_tab_char(char ***tab);
+void	resolve(t_filler *f);
 
 
 
