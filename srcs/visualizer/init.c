@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 18:32:00 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/28 18:35:17 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/29 20:05:00 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_SDL(t_visu *v)
 		exit(1);
 	}
 	v->window = SDL_CreateWindow("mdubus's Filler", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, WIDTH_W, HEIGHT_W,
+			SDL_WINDOWPOS_CENTERED, v->width_w, v->height_w,
 			SDL_WINDOW_RESIZABLE|SDL_WINDOW_SHOWN);
 	v->title = TTF_OpenFont("srcs/visualizer/KGSecondChancesSketch.ttf", 55);
 	if(!v->title)

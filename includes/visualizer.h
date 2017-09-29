@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/27 11:03:58 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/28 18:33:21 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/29 18:54:17 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 #include <stdbool.h>
 #include <SDL_ttf.h>
 
-#define WIDTH_W 800
-#define HEIGHT_W 600
-
 typedef struct	s_visu
 {
 	SDL_Window	*window;
@@ -36,9 +33,12 @@ typedef struct	s_visu
 	SDL_Color	white;
 	SDL_Color	purple;
 	SDL_Color	pink;
+	SDL_Rect	rect;
 	bool		loop;
 	int			width_w;
 	int			height_w;
+	int			nb_x;
+	int			nb_y;
 	char		*p1;
 	char		*p2;
 }				t_visu;
