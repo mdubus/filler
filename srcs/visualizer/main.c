@@ -6,66 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 17:08:23 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/29 20:25:36 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/09/30 21:07:41 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#include "../../includes/filler.h"
-
-void	get_player_name(char *line, char **player);
-void	get_player_name(char *line, char **player)
-{
-	char	**tab;
-	char	**tab2;
-	int		i;
-	int		j;
-
-	if (ft_strstr(line, "bad player") != 0)
-		exit(1);
-	tab = NULL;
-	tab2 = NULL;
-	i = 0;
-	j = 0;
-	tab = ft_strsplit(line, '/');
-	while (ft_strstr(tab[i], ".filler") == 0)
-		i++;
-	tab2 = ft_strsplit(tab[i], '.');
-	while (ft_strstr(tab2[j], "filler") == 0)
-		j++;
-	*player = ft_strdup(tab2[j - 1]);
-	ft_free_tab_char(&tab);
-	ft_free_tab_char(&tab2);
-	free(line);
-}
-
-void	get_players(t_visu *v);
-void	get_players(t_visu *v)
-{
-	char	*line;
-	int		i;
-	int		j;
-
-	line = NULL;
-
-	i = 6;
-	j = 0;
-	while (i-- > 0)
-	{
-		get_next_line_backslash(STDIN_FILENO, &line);
-		if (ft_strstr("error:", line) != 0)
-			exit(1);
-		free(line);
-	}
-	get_next_line_backslash(STDIN_FILENO, &line);
-	get_player_name(line, &v->p1);
-	v->p1 = ft_strjoin_proper("p1 = ", 0, v->p1, 1);
-
-	get_next_line_backslash(STDIN_FILENO, &line);
-	get_next_line_backslash(STDIN_FILENO, &line);
-	get_player_name(line, &v->p2);
-	v->p2 = ft_strjoin_proper("p2 = ", 0, v->p2, 1);
-}
 
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *texte, int x, int y)
 {
@@ -81,172 +26,179 @@ SDL_Color	init_color(int r, int g, int b, int a)
 {
 	SDL_Color	color;
 
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	color.a = a;
+	color.r = (Uint8)r;
+	color.g = (Uint8)g;
+	color.b = (Uint8)b;
+	color.a = (Uint8)a;
 	return (color);
 }
 
-void	set_header(t_visu *v);
-void	set_header(t_visu *v)
-{
-	int	w;
-	int	h;
-
-	v->surf = SDL_GetWindowSurface(v->window);
-	SDL_FillRect(v->surf, NULL, SDL_MapRGB(v->surf->format, 65, 51, 51));
-
-	TTF_SizeText(v->title, "Filler", &w, &h);
-	put_on_screen_sdl(v, TTF_RenderText_Blended(v->title, "Filler", v->white), (v->width_w / 2 - w / 2), 20);
-
-	TTF_SizeText(v->police, v->p1, &w, &h);
-	put_on_screen_sdl(v, TTF_RenderText_Blended(v->police, v->p1, v->purple), (v->width_w / 2 - w - 100), 100);
-
-	put_on_screen_sdl(v, TTF_RenderText_Blended(v->police, v->p2, v->pink), (v->width_w / 2 + 100), 100);
-}
-
-void	set_params_rects(t_visu *v, int width_w, int width_r, char **tab);
 void	set_params_rects(t_visu *v, int width_w, int width_r, char **tab)
 {
-		v->width_w = width_w;
+	v->width_w = width_w;
+	if (width_w == 800)
+		v->height_w = width_w + 100;
+	else if (width_w == 1000)
+		v->height_w = width_w + 50;
+	else if (width_w == 1200)
 		v->height_w = width_w;
-		v->rect.w = width_r;
-		v->rect.h = width_r;
-		v->nb_x = ft_atoi(tab[2]);
-		v->nb_y = ft_atoi(tab[1]);
+	v->nb_x = ft_atoi(tab[2]);
+	v->nb_y = ft_atoi(tab[1]);
+	if (v->nb_x > v->nb_y)
+		width_r = (width_w - 200 - v->nb_x) / v->nb_x;
+	else
+		width_r = (width_w - 350 - v->nb_y) / v->nb_y;
+	v->rect.w = width_r;
+	v->rect.h = width_r;
 }
 
-void	get_window_size(t_visu *v);
-void	get_window_size(t_visu *v)
+int		stock_map(t_visu *v, t_v **t, char **line)
 {
-	char	*line;
-	char	**tab;
+	int		i;
 
-	tab = NULL;
-	line = NULL;
+	i = 0;
+	v->ret = get_next_line_backslash(STDIN_FILENO, line);
+	if (ft_strstr(*line, "Plateau") == 0 || ft_strstr(*line, "fin") != 0)
+		return (1);
+	v->ret = get_next_line_backslash(STDIN_FILENO, line);
+	v->ret = get_next_line_backslash(STDIN_FILENO, line);
+	ft_putstr(*line);
 
-	get_next_line_backslash(STDIN_FILENO, &line);
-	tab = ft_strsplit(line, ' ');
-	free(line);
-	if (ft_strstr(tab[0], "Plateau") == 0)
-		exit(1);
-	if (ft_atoi(tab[1]) <= 20 && ft_atoi(tab[2]) <= 20)
-		set_params_rects(v, 800, 28, tab);
-	else if (ft_atoi(tab[1]) <= 50 && ft_atoi(tab[2]) <= 50)
-		set_params_rects(v, 1000, 18, tab);
-	else if (ft_atoi(tab[1]) <= 100 && ft_atoi(tab[2]) <= 100)
-		set_params_rects(v, 1200, 25, tab);
-	else
+/*	while (ft_strstr(*line, "000") == 0)
 	{
-		ft_free_tab_char(&tab);
-		exit(1);
+		free(*line);
+		v->ret = get_next_line_backslash(STDIN_FILENO, line);
+		if (v->ret == -1)
+		{
+			free(*line);
+			exit(1);
+		}
+		if (v->ret == 0 || ft_strstr(*line, "fin") != 0)
+		{
+			*t = NULL;
+			return (1);
+		}
+	}*/
+	(*t)->tab = (char**)malloc(sizeof(char*) * (v->nb_y + 1));
+	while (i < v->nb_y - 1)
+	{
+		if (ft_strlen(*line) != (size_t)v->nb_x + 5)
+			exit (1);
+		(*t)->tab[i++] = ft_strsub(*line, 4, v->nb_x);
+		free(*line);
+		v->ret = get_next_line_backslash(STDIN_FILENO, line);
+		ft_putstr(*line);
+		if (v->ret == 0)
+			return (1);
+
 	}
-	ft_free_tab_char(&tab);
+	(*t)->tab[i] = NULL;
+	
+
+	//// Piece
+	// Les pieces
+	// got
+	// Plateau
+	return (0);
 }
 
 int	main(void)
 {
-	t_visu	v;
+/*	
+char	*line;
 
+line = NULL;
+
+while (get_next_line_backslash(STDIN_FILENO, &line) != 0)
+	ft_putstr(line);
+*/
 	
+	t_visu	v;
+	t_v		*t;
+	t_v *begin;
+
 	init_struct_visu(&v);
 	get_players(&v);
 	get_window_size(&v);
-	
 
-
-
-
-	
 	init_SDL(&v);
 	set_header(&v);
-
-	SDL_Rect	border;
-	SDL_Surface		*sborder;
-	int	width_line;
-	int	height_line;
-
-	width_line = v.nb_x * v.rect.w + (v.nb_x - 1) * 2;
-	height_line = v.nb_y * v.rect.h + (v.nb_y - 1) * 2;
-//	printf("%d\n", width_line);
-
-	int nb_x;
-
-	nb_x = v.nb_x;
-
-	border.x = (v.width_w - width_line) / 2;
-	border.y = 180 - 2;
-	border.h = height_line + 4;
-	border.w = 2;
-
-	sborder = SDL_CreateRGBSurface(0, border.w, border.h, 32, 0, 0, 0, 0);
-	while (nb_x >= 0)
-	{
-	// Verticale Gauche
-	SDL_FillRect(sborder, NULL, SDL_MapRGB(sborder->format, 250, 227, 227));
-	SDL_BlitSurface(sborder, NULL, v.surf, &border);
-	border.x += v.rect.w + 2;
-	nb_x--;
-	}
-	SDL_FreeSurface(sborder);
+	put_grid_vertic(&v);
+	put_grid_horiz(&v);
 
 
 
+(void)t;
 
-	int	nb_y;
+	char	*line;
+	int		i;
 
-	nb_y = v.nb_y;
-
-	// Horizontale haut
-	border.x = (v.width_w - width_line) / 2;
-	border.y = 180 - 2;
-	border.h = 2;
-	border.w = width_line + 4;
+	line = NULL;
+	i = 0;
+	get_next_line_backslash(STDIN_FILENO, &line);
+//	ft_putendl("\nfirst line");
+	get_next_line_backslash(STDIN_FILENO, &line);
+	t = malloc(sizeof(t));
+	begin = t;
 	
-	sborder = SDL_CreateRGBSurface(0, border.w, border.h, 32, 0, 0, 0, 0);
+	stock_map(&v, &t, &line);
 
-	while (nb_y >= 0)
-	{
-	SDL_FillRect(sborder, NULL, SDL_MapRGB(sborder->format, 250, 227, 227));
-	SDL_BlitSurface(sborder, NULL, v.surf, &border);
-	border.y += v.rect.h + 2;
-	nb_y--;
-	}
-	SDL_FreeSurface(sborder);
+	if (v.ret != 1)
+		t->next = NULL;
+
+	while (ft_strstr(line, "got") == 0)
+		get_next_line_backslash(STDIN_FILENO, &line);
 	
+
+//	get_next_line_backslash(STDIN_FILENO, &line);
+//	ft_putendl(line);
+
+	// PLateau ou fin
 	
-	
-	
-	
-/*
-	int	w;
-	int	h;
-	SDL_Surface		*pink;
-
-	v.rect.x = 252;
-	v.rect.y = 200;
-
-	
-	pink = SDL_CreateRGBSurface(0, v.rect.w, v.rect.h, 32, 0, 0, 0, 0);
-	SDL_FillRect(pink, NULL, SDL_MapRGB(pink->format, 207, 71, 132));
-	SDL_BlitSurface(pink, NULL, v.surf, &v.rect);
-
-	SDL_Surface		*purple;
-
-	v.rect.x = 200;
-	v.rect.y = 200;
-
-	purple = SDL_CreateRGBSurface(0, v.rect.w, v.rect.h, 32, 0, 0, 0, 0);
-	SDL_FillRect(purple, NULL, SDL_MapRGB(purple->format, 185, 119, 212));
-	SDL_BlitSurface(purple, NULL, v.surf, &v.rect);
-
-	TTF_SizeText(v.police, "X", &w, &h);
-	put_on_screen_sdl(&v, TTF_RenderText_Blended(v.police, "X", v.white), 252 + w / 2, 205);
-
-	TTF_SizeText(v.police, "O", &w, &h);
-	put_on_screen_sdl(&v, TTF_RenderText_Blended(v.police, "O", v.white), 200 + w / 2, 205);
+	//	}
+	//	t->next = NULL;
+	/*
+	   while (begin->next != NULL)
+	   {
+	   i = 0;
+	   while (begin->tab[i] != NULL)
+	   printf("%s\n", begin->tab[i++]);
+	   begin = begin->next;
+	   printf("\n");
+	   }
+	   
 */
+
+
+
+	/*
+	   int	w;
+	   int	h;
+	   SDL_Surface		*pink;
+
+	   v.rect.x = 252;
+	   v.rect.y = 200;
+
+
+	   pink = SDL_CreateRGBSurface(0, v.rect.w, v.rect.h, 32, 0, 0, 0, 0);
+	   SDL_FillRect(pink, NULL, SDL_MapRGB(pink->format, 207, 71, 132));
+	   SDL_BlitSurface(pink, NULL, v.surf, &v.rect);
+
+	   SDL_Surface		*purple;
+
+	   v.rect.x = 200;
+	   v.rect.y = 200;
+
+	   purple = SDL_CreateRGBSurface(0, v.rect.w, v.rect.h, 32, 0, 0, 0, 0);
+	   SDL_FillRect(purple, NULL, SDL_MapRGB(purple->format, 185, 119, 212));
+	   SDL_BlitSurface(purple, NULL, v.surf, &v.rect);
+
+	   TTF_SizeText(v.police, "X", &w, &h);
+	   put_on_screen_sdl(&v, TTF_RenderText_Blended(v.police, "X", v.white), 252 + w / 2, 205);
+
+	   TTF_SizeText(v.police, "O", &w, &h);
+	   put_on_screen_sdl(&v, TTF_RenderText_Blended(v.police, "O", v.white), 200 + w / 2, 205);
+	   */
 
 	SDL_UpdateWindowSurface(v.window);
 
@@ -256,9 +208,55 @@ int	main(void)
 		while (SDL_PollEvent(&event))
 		{
 			if (event.type == SDL_QUIT)
+			{
 				v.loop = false;
+			}
+			else if(event.type == SDL_KEYDOWN)
+			{
+				if (event.key.keysym.sym == LEFT)
+					printf("LEFT");
+				else if (event.key.keysym.sym == RIGHT)
+				{
+					if (v.ret != 0)
+					{
+						ft_putendl("Enter here");
+						t->next = malloc(sizeof(*t));
+						t->next->prev = t;
+						t = t->next;
+//						i = 0;
+//						while (t->prev->tab[i] && t->prev->tab[i] != NULL)
+//							ft_putendl(t->prev->tab[i++]);
+						ft_putstr(line);
+						if (stock_map(&v, &t, &line) == 1)
+						{
+							v.ret = 0;
+							t->next = NULL;
+						}
+					}
+					else
+					{
+						ft_putendl("FIN !");
+						t->next = NULL;
+					}
+					ft_putchar('\n');
+					
+
+				}
+				else if (event.key.keysym.sym == CLOSE)
+					v.loop = false;
+			}
 		}
 	}
+/*	while (begin->next != NULL)
+	{
+	i = 0;
+	while (begin->tab[i] != NULL)
+		ft_putendl(begin->tab[i++]);
+	begin = begin->next;
+	ft_putchar('\n');
+	}*/
+
+
 	if (v.loop == false)
 	{
 		TTF_CloseFont(v.police);
