@@ -13,8 +13,8 @@
 CC			=	clang
 NAME		=	mdubus.filler
 VISU		=	visu
-#FLAGS		=	-Wall -Wextra -Werror -g -Weverything -fsanitize=address
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -g -Weverything -fsanitize=address
+#FLAGS		=	-Wall -Wextra -Werror
 LIBDIR		=	libft
 LIBLINK		=	-L $(LIBDIR) -lft
 LIB 		=	$(LIBDIR)/libft.a
@@ -37,8 +37,7 @@ SRC_ALGO	=	main.c init_struct_filler.c free.c get_player_info.c\
 				init_heat_map.c do_heat_map.c get_piece.c stock_piece.c\
 				search_next_star.c count_score.c resolve.c
 
-SRC_VISU	=	main.c init.c get_players.c set_header.c get_window_size.c\
-				put_grid.c
+SRC_VISU	=	main.c get_players_vm.c init.c useful.c
 
 OBJ_ALGO	=	$(SRC_ALGO:.c=.o)
 OBJ_VISU	=	$(SRC_VISU:.c=.o)
