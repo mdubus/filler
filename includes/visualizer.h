@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/27 11:03:58 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/01 19:02:27 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/02 16:22:57 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct	s_visu
 	char		*line;
 	int			nb_x;
 	int			nb_y;
+	int			status;
+	int			padding4;
 }				t_visu;
 
 /*
@@ -78,6 +80,7 @@ void	verif_header_vm(void);
 void	init_struct_visu(t_visu *v);
 void	put_error_fd(char *line, char *str) __attribute__((noreturn));
 void	ft_compare(char *str);
+void	get_board_infos(t_v **t, t_visu *v);
 
 
 
