@@ -6,24 +6,39 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 15:26:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/28 14:20:16 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 19:17:12 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-void	get_player_info(t_filler *f, char *line)
+static void	get_player_line(char **line)
 {
-	if (get_next_line_backslash(STDIN_FILENO, &line) != 1)
-		ft_print_error_fd_exit(ft_putstr_fd, "Error 6", f->ttys);
-	if (ft_nb_occur_char_in_str(line, " ") != 4)
-		ft_print_error_fd_exit(ft_putstr_fd, "Error 7", f->ttys);
+	int	ret;
+
+	ret = -1;
+	if ((ret = get_next_line_backslash(STDIN_FILENO, line)) != 1)
+	{
+		if (ret == 0)
+			free(*line);
+		exit(1);
+	}
+	if (ft_nb_occur_char_in_str(*line, " ") != 4)
+	{
+		free(*line);
+		exit(1);
+	}
+}
+
+void		get_player_info(t_filler *f, char *line)
+{
+	get_player_line(&line);
 	f->tab = ft_strsplit(line, ' ');
 	free(line);
-	compare_return_error("$$$", f->tab[0], f->ttys);
-	compare_return_error("exec", f->tab[1], f->ttys);
-	compare_return_error(":", f->tab[3], f->ttys);
-	compare_return_error("[./mdubus.filler]\n", f->tab[4], f->ttys);
+	compare_return_error("$$$", f->tab[0], f->tab);
+	compare_return_error("exec", f->tab[1], f->tab);
+	compare_return_error(":", f->tab[3], f->tab);
+	compare_return_error("[./mdubus.filler]\n", f->tab[4], f->tab);
 	if (ft_strcmp(f->tab[2], "p1") == 0)
 	{
 		f->letter_me = 'O';
@@ -35,6 +50,9 @@ void	get_player_info(t_filler *f, char *line)
 		f->letter_ennemy = 'O';
 	}
 	else
-		ft_print_error_fd_exit(ft_putstr_fd, "Error 8", f->ttys);
+	{
+		ft_free_tab_char(&f->tab);
+		exit(1);
+	}
 	ft_free_tab_char(&f->tab);
 }

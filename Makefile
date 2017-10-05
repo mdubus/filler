@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gpouyat <gpouyat@student.42.fr>            +#+  +:+       +#+         #
+#    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/22 14:11:57 by gpouyat           #+#    #+#              #
-#*   Updated: 2016/12/01 11:50:27 by gpouyat          ###   ########.fr       *#
+#    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
+#    Updated: 2017/10/05 19:12:38 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC_ALGO	=	main.c init_struct_filler.c free.c get_player_info.c\
 
 SRC_VISU	=	main.c get_players_vm.c init.c useful.c get_board_infos.c\
 				get_result.c stock_link.c stock_links.c get_screen_dimensions.c\
-				write_players.c write_filler.c put_grid.c
+				write_players.c write_filler.c put_grid.c draw_rect.c free.c\
+				put_result.c who_wins.c loop.c
 
 OBJ_ALGO	=	$(SRC_ALGO:.c=.o)
 OBJ_VISU	=	$(SRC_VISU:.c=.o)

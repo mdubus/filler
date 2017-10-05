@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 11:11:24 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/03 16:44:30 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 12:12:48 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ static void	stock_map(t_v **t, t_visu *v, int current_player)
 	}
 	(*t)->tab[i] = NULL;
 	(*t)->current_player = current_player;
-	(*t)->next = NULL;
-	(*t)->prev = NULL;
 }
 
 static void	parse_map(t_visu *v, char **line, t_v *begin, int *current_player);
@@ -100,7 +98,6 @@ static void	parse_map(t_visu *v, char **line, t_v *begin, int *current_player)
 {
 	if (get_next_line_backslash(STDIN_FILENO, line) != 1)
 	{
-		ft_putendl(*line);
 		ft_putendl("ERROR 4");
 		free_linked_list(v, *line, begin);
 	}
@@ -110,6 +107,21 @@ static void	parse_map(t_visu *v, char **line, t_v *begin, int *current_player)
 		free_linked_list(v, *line, begin);
 	}
 	pass_piece(line, v, begin);
+	if (ft_strstr(*line, "error on input") != 0)
+	{
+		free(*line);
+		if (get_next_line_backslash(STDIN_FILENO, line) != 1)
+		{
+			ft_putendl("ERROR 4");
+			free_linked_list(v, *line, begin);
+		}
+		if (ft_strstr(*line, "Piece") == 0)
+		{
+			ft_putendl("ERROR 5");
+			free_linked_list(v, *line, begin);
+		}
+		pass_piece(line, v, begin);
+	}
 	if (ft_strstr(*line, "got") == 0)
 	{
 		ft_putendl("ERROR 6");
@@ -119,7 +131,7 @@ static void	parse_map(t_visu *v, char **line, t_v *begin, int *current_player)
 		*current_player = 1;
 	else if (ft_strstr(*line, "X") != 0)
 		*current_player = 2;
-	free(*line);
+	free(*line); // Probleme ici
 }
 
 void		stock_link(t_visu **v, t_v **t, t_v *begin)

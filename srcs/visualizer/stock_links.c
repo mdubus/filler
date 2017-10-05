@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:18:17 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/03 17:33:56 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 11:33:21 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	stock_links(t_visu *v, t_v **t, t_v *begin)
 	(*t)->prev = NULL;
 	while (v->status != 2)
 	{
-	//	printf("%d", v->status);
+//	ft_putendl("ENTER HERE");
+//		ft_printf("%d", v->status);
 		if (v->status != 1)
 		{
 	//		printf(" STOCK LINK !\n");
 			stock_link(&v, t, begin);
-	//		printf("status = %d\n", v->status);
 		}
 		else
 		{

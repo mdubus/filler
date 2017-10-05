@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/27 11:03:58 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/03 19:31:43 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 15:35:23 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ typedef struct	s_visu
 {
 	SDL_Window	*window;
 	SDL_Surface	*surf;
+//	SDL_Surface	*save;
 	TTF_Font	*police;
 	TTF_Font	*police_big;
 	TTF_Font	*title;
+	SDL_Event	event;
 	bool		loop;
 	SDL_Color	white;
 	SDL_Color	purple;
 	SDL_Color	pink;
-//	SDL_Rect	rect;
 	char		*p1;
 	char		*p2;
 	char		*line;
@@ -67,21 +68,10 @@ typedef struct	s_visu
 	int			height_line;
 	int			startx;
 	int			starty;
+	int			first_time;
+	int			padding4;
 	t_v			*begin;
 }				t_visu;
-
-/*
-void		init_struct_visu(t_visu *v);
-void		init_SDL(t_visu *v);
-SDL_Color	init_color(int r, int g, int b, int a);
-void		get_player_name(char *line, char **player);
-void		get_players(t_visu *v);
-void		set_header(t_visu *v);
-void	put_on_screen_sdl(t_visu *v, SDL_Surface *texte, int x, int y);
-void	get_window_size(t_visu *v);
-void	set_params_rects(t_visu *v, int width_w, int width_r, char **tab);
-void	put_grid_horiz(t_visu *v);
-void	put_grid_vertic(t_visu *v);*/
 
 void	get_player_name_vm(char *line, char	**player);
 void	get_p1_vm(char *line, t_visu **v);
@@ -107,6 +97,15 @@ void	init_typo(t_visu *v, t_v *begin);
 void	init_sdl(t_visu *v, t_v *begin);
 void	put_grid_horiz(t_visu *v, t_v *begin);
 void	put_grid_vertic(t_visu *v, t_v *begin);
+void	draw_rect(int i, int j, t_visu *v, t_v *begin);
+void	free_everything(t_visu *v, t_v *begin)__attribute__((noreturn));
+void	put_result_p1(t_visu *v, t_v *begin);
+void	put_result_p2(t_visu *v, t_v *begin);
+void	event_loop(t_visu *v, t_v **begin);
+void	case_loop_false(t_visu *v);
+void	draw_result(t_v **begin, t_visu *v);
+void	put_background(t_visu *v, t_v *begin);
+void	check_for_piece(t_v *begin, t_visu *v);
 
 
 

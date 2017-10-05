@@ -6,13 +6,28 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:39:52 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/23 17:26:39 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 20:54:00 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-void	stock_piece(t_filler *f)
+static void	stock_line(t_filler *f, int i, char *temp)
+{
+	int	ret;
+
+	ret = -1;
+	if ((ret = get_next_line_backslash(STDIN_FILENO, &f->line)) != 1)
+	{
+		if (ret == 0)
+			free(f->line);
+		if (i > 0)
+			free(temp);
+		free_maps(f);
+	}
+}
+
+void		stock_piece(t_filler *f)
 {
 	int		i;
 	char	*temp;
@@ -21,8 +36,7 @@ void	stock_piece(t_filler *f)
 	temp = NULL;
 	while (i < f->h_piece)
 	{
-		if (get_next_line_backslash(STDIN_FILENO, &f->line) != 1)
-			ft_print_error_fd_exit(ft_putstr_fd, "Error 8", f->ttys);
+		stock_line(f, i, temp);
 		if (temp == NULL)
 		{
 			temp = ft_strdup(f->line);

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 18:23:41 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/03 18:50:10 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 15:30:07 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_struct_visu(t_visu *v)
 	v->white = init_color(255, 255, 255, 255);
 	v->purple = init_color(215, 149, 242, 255);
 	v->pink = init_color(237, 101, 162, 255);
+	v->first_time = 0;
 }
 
 void	init_typo(t_visu *v, t_v *begin)
@@ -81,10 +82,15 @@ void	init_sdl(t_visu *v, t_v *begin)
 	}
 	if ((v->window = SDL_CreateWindow("mdubus's Filler", SDL_WINDOWPOS_CENTERED,
 					SDL_WINDOWPOS_CENTERED, v->width_w, v->height_w,
-					SDL_WINDOW_RESIZABLE|SDL_WINDOW_SHOWN)) == NULL)
+					SDL_WINDOW_SHOWN)) == NULL)
 	{
 		ft_putstr("Unable to initialize window : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
 	init_typo(v, begin);
+	if ((v->surf = SDL_GetWindowSurface(v->window)) == NULL)
+	{
+		ft_putstr("Unable to initialize surface : ");
+		free_all_visu(begin, v, SDL_GetError());
+	}
 }

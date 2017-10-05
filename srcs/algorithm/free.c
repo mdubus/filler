@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 15:39:52 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/28 14:18:55 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 20:30:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,20 @@ void		free_all(t_filler *f)
 	free_tab(f);
 	free_hmap(f);
 	free_piece(f);
+}
+
+void		free_maps(t_filler *f)
+{
+	int	i;
+
+	i = 0;
+	while (i < f->h_board)
+	{
+		free(f->map[i]);
+		free(f->hmap[i]);
+		i++;
+	}
+	free(f->map);
+	free(f->hmap);
+	exit(1);
 }

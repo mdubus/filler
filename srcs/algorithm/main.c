@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:39:10 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/30 12:08:09 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/05 19:01:43 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int	main(void)
 		get_piece(&f);
 		stock_piece(&f);
 		resolve(&f);
-		printf("%d %d\n", f.tempy, f.tempx);
-		fflush(stdout);
+		ft_putnbr(f.tempy);
+		ft_putchar(' ');
+		ft_putnbr(f.tempx);
+		ft_putchar('\n');
 		free_all(&f);
 	}
+	return (0);
 }
