@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 15:20:05 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 15:34:56 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:44:17 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 static void	draw_prev(t_v **begin, t_visu *v)
 {
@@ -36,7 +35,7 @@ static void	draw_next(t_v **begin, t_visu *v)
 	}
 }
 
-void	event_loop(t_visu *v, t_v **begin)
+void		event_loop(t_visu *v, t_v **begin)
 {
 	while (v->loop)
 	{
@@ -44,7 +43,7 @@ void	event_loop(t_visu *v, t_v **begin)
 		{
 			if (v->event.type == SDL_QUIT)
 				v->loop = false;
-			else if(v->event.type == SDL_KEYDOWN)
+			else if (v->event.type == SDL_KEYDOWN)
 			{
 				if (v->event.key.keysym.sym == LEFT)
 					draw_prev(begin, v);
@@ -61,7 +60,7 @@ void	event_loop(t_visu *v, t_v **begin)
 	}
 }
 
-void	case_loop_false(t_visu *v)
+void		case_loop_false(t_visu *v)
 {
 	if (v->loop == false)
 	{

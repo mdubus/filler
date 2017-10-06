@@ -6,25 +6,25 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 14:57:32 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 15:35:31 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:44:45 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 static void	p1_wins(t_visu *v, t_v *begin)
 {
 	SDL_Surface	*temp;
-	int		w;
-	int		h;
+	int			w;
+	int			h;
 
 	if (TTF_SizeText(v->police_big, "P1 WINS !", &w, &h) == -1)
 	{
 		ft_putstr("Error on TTF_SizeText : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
-	if ((temp = TTF_RenderText_Blended(v->police_big, "P1 WINS !", v->purple)) == NULL)
+	if ((temp = TTF_RenderText_Blended(v->police_big, "P1 WINS !",
+					v->purple)) == NULL)
 	{
 		ft_putstr("Error on TTF_RenderText_Blended : ");
 		free_all_visu(begin, v, SDL_GetError());
@@ -35,15 +35,16 @@ static void	p1_wins(t_visu *v, t_v *begin)
 static void	p2_wins(t_visu *v, t_v *begin)
 {
 	SDL_Surface	*temp;
-	int		w;
-	int		h;
+	int			w;
+	int			h;
 
 	if (TTF_SizeText(v->police_big, "P2 WINS !", &w, &h) == -1)
 	{
 		ft_putstr("Error on TTF_SizeText : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
-	if ((temp = TTF_RenderText_Blended(v->police_big, "P2 WINS !", v->pink)) == NULL)
+	if ((temp = TTF_RenderText_Blended(v->police_big, "P2 WINS !",
+					v->pink)) == NULL)
 	{
 		ft_putstr("Error on TTF_RenderText_Blended : ");
 		free_all_visu(begin, v, SDL_GetError());
@@ -54,15 +55,16 @@ static void	p2_wins(t_visu *v, t_v *begin)
 static void	equality(t_visu *v, t_v *begin)
 {
 	SDL_Surface	*temp;
-	int		w;
-	int		h;
+	int			w;
+	int			h;
 
 	if (TTF_SizeText(v->police_big, "Equality !", &w, &h) == -1)
 	{
 		ft_putstr("Error on TTF_SizeText : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
-	if ((temp = TTF_RenderText_Blended(v->police_big, "Equality !", v->white)) == NULL)
+	if ((temp = TTF_RenderText_Blended(v->police_big, "Equality !",
+					v->white)) == NULL)
 	{
 		ft_putstr("Error on TTF_RenderText_Blended : ");
 		free_all_visu(begin, v, SDL_GetError());
@@ -70,7 +72,7 @@ static void	equality(t_visu *v, t_v *begin)
 	put_on_screen_sdl(v, temp, (v->width_w / 2 - w / 2), v->height_w - 120);
 }
 
-void	draw_result(t_v **begin, t_visu *v)
+void		draw_result(t_v **begin, t_visu *v)
 {
 	v->first_time = 1;
 	put_result_p1(v, *begin);

@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 17:11:46 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 18:58:20 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:44:53 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 void	write_p1(SDL_Surface **temp, t_visu *v, t_v *begin)
 {
@@ -41,7 +40,6 @@ void	write_p2(SDL_Surface **temp, t_visu *v, t_v *begin)
 		ft_putstr("Error on TTF_SizeText : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
-
 	if ((*temp = TTF_RenderText_Blended(v->police, v->p2, v->pink)) == NULL)
 	{
 		ft_putstr("Error on TTF_RenderText_Blended : ");

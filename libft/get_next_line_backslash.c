@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_backslash.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 10:30:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/07 18:38:51 by mdubus           ###   ########.fr       */
+/*   Created: 2017/10/06 10:53:54 by mdubus            #+#    #+#             */
+/*   Updated: 2017/10/06 10:55:12 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 #include <stdio.h>
 
-static void		mew_lst(t_dlist **mew, int fd)
+static void	mew_lst(t_dlist **mew, int fd)
 {
 	*mew = (t_dlist *)malloc(sizeof(**mew));
 	(*mew)->reste = ft_strnew(0);
@@ -21,7 +21,7 @@ static void		mew_lst(t_dlist **mew, int fd)
 	(*mew)->next = NULL;
 }
 
-static void		multi_fd_gnl(t_dlist **mew, t_dlist **mew2, int fd)
+static void	multi_fd_gnl(t_dlist **mew, t_dlist **mew2, int fd)
 {
 	static t_dlist	*begin;
 
@@ -48,7 +48,7 @@ static void		multi_fd_gnl(t_dlist **mew, t_dlist **mew2, int fd)
 	}
 }
 
-static int			backslash_in_buffer(char *buffer, int length, t_dlist **mew,
+static int	backslash_in_buffer(char *buffer, int length, t_dlist **mew,
 			char **line)
 {
 	char	*temp;
@@ -78,7 +78,7 @@ static int			backslash_in_buffer(char *buffer, int length, t_dlist **mew,
 	return (0);
 }
 
-static int			backslash_in_rest(int fd, char **line, t_dlist **mew, char **buffer)
+static int	backslash_in_rest(int fd, char **line, t_dlist **mew, char **buffer)
 {
 	size_t		n;
 	char		*temp;

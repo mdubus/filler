@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 18:23:41 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 15:30:07 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:44:13 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 void	verif_header_vm(void)
 {
@@ -49,19 +48,20 @@ void	init_struct_visu(t_visu *v)
 void	init_typo(t_visu *v, t_v *begin)
 {
 	v->title = TTF_OpenFont("srcs/visualizer/KGSecondChancesSketch.ttf", 55);
-	if(!v->title)
+	if (!v->title)
 	{
 		ft_putstr("Unable to initialize title : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
 	v->police = TTF_OpenFont("srcs/visualizer/KGSecondChancesSketch.ttf", 30);
-	if(!v->police)
+	if (!v->police)
 	{
 		ft_putstr("Unable to initialize police : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
-	v->police_big = TTF_OpenFont("srcs/visualizer/KGSecondChancesSketch.ttf", 35);
-	if(!v->police_big)
+	v->police_big = TTF_OpenFont("srcs/visualizer/KGSecondChancesSketch.ttf",
+			35);
+	if (!v->police_big)
 	{
 		ft_putstr("Unable to initialize police_big : ");
 		free_all_visu(begin, v, SDL_GetError());
@@ -75,7 +75,7 @@ void	init_sdl(t_visu *v, t_v *begin)
 		ft_putstr("Unable to initialize SDL : ");
 		free_all_visu(begin, v, SDL_GetError());
 	}
-	if(TTF_Init()==-1)
+	if (TTF_Init() == -1)
 	{
 		ft_putstr("TTF_init : ");
 		free_all_visu(begin, v, SDL_GetError());

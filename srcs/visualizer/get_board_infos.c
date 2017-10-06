@@ -6,14 +6,12 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 13:25:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/03 15:22:09 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:43:56 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
-static void free_board_infos(t_v **t, t_visu *v, char *line)__attribute__((noreturn));
 static void	free_board_infos(t_v **t, t_visu *v, char *line)
 {
 	free(v->p1);

@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 11:15:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/03 16:48:38 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 11:05:19 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 void	get_results(char **line, t_visu **v, t_v *begin)
 {
@@ -28,10 +27,7 @@ void	get_results(char **line, t_visu **v, t_v *begin)
 	if (ft_strstr((*v)->p2, "aucun") == 0)
 	{
 		if (get_next_line_backslash(STDIN_FILENO, line) != 1)
-		{
-			ft_putendl("ERROR 8");
 			free_linked_list(*v, *line, begin);
-		}
 		tab = ft_strsplit(*line, ' ');
 		if (ft_strstr(tab[1], "X") != 0)
 			(*v)->resultp2 = ft_atoi(tab[3]);

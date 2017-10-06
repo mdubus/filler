@@ -6,14 +6,12 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:20:28 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 14:33:39 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:44:08 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
-static void	set_dimensions(t_visu *v, int width, int height, int square);
 static void	set_dimensions(t_visu *v, int width, int height, int square)
 {
 	v->width_w = width;
@@ -21,7 +19,6 @@ static void	set_dimensions(t_visu *v, int width, int height, int square)
 	v->square = square;
 }
 
-static void	higher_than_wide(t_visu *v, t_v *begin);
 static void	higher_than_wide(t_visu *v, t_v *begin)
 {
 	if (v->nb_y <= 20)
@@ -37,7 +34,7 @@ static void	higher_than_wide(t_visu *v, t_v *begin)
 		free_all_visu(begin, v, "Map is too big !");
 }
 
-void	get_screen_dimensions(t_visu *v, t_v *begin)
+void		get_screen_dimensions(t_visu *v, t_v *begin)
 {
 	if (v->nb_x >= v->nb_y)
 	{

@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_for_piece.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/01 15:27:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 10:44:21 by mdubus           ###   ########.fr       */
+/*   Created: 2017/10/06 10:27:45 by mdubus            #+#    #+#             */
+/*   Updated: 2017/10/06 10:43:44 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
 
-int		main(void)
+void	check_for_piece(t_v *begin, t_visu *v)
 {
-	t_visu	v;
-	t_v		*t;
-	t_v		*begin;
+	int	i;
+	int	j;
 
-	init_struct_visu(&v);
-	verif_header_vm();
-	get_players_vm(&v);
-	get_board_infos(&t, &v);
-	begin = t;
-	stock_links(&v, &t, begin);
-	v.begin = begin;
-	get_screen_dimensions(&v, begin);
-	init_sdl(&v, begin);
-	put_background(&v, begin);
-	check_for_piece(begin, &v);
-	SDL_UpdateWindowSurface(v.window);
-	event_loop(&v, &begin);
-	case_loop_false(&v);
-	return (0);
+	i = 0;
+	j = 0;
+	while (begin->tab[i] != NULL)
+	{
+		j = 0;
+		while (j < v->nb_x)
+		{
+			if (begin->tab[i][j] != '.')
+				draw_rect(i, j, v, begin);
+			j++;
+		}
+		i++;
+	}
 }

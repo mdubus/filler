@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 14:53:08 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 14:54:22 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 11:05:06 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 void	free_linked_list(t_visu *v, char *line, t_v *begin)
 {
@@ -35,7 +34,6 @@ void	free_linked_list(t_visu *v, char *line, t_v *begin)
 	while (begin->tab[i] != NULL)
 		free(begin->tab[i++]);
 	free(begin);
-	ft_putendl("ERROR");
 	exit(1);
 }
 

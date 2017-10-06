@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 18:22:10 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/03 15:04:26 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:44:00 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 void		get_player_name_vm(char *line, char **player)
 {
@@ -44,7 +43,6 @@ void		get_p1_vm(char *line, t_visu **v)
 	(*v)->p1 = ft_strjoin_proper("p1 = ", 0, (*v)->p1, 1);
 }
 
-static void	parse_p2(char **line, t_visu **v);
 static void	parse_p2(char **line, t_visu **v)
 {
 	int	ret;
@@ -88,7 +86,6 @@ void		get_p2_vm(t_visu **v)
 	{
 		parse_p2(&line, v);
 	}
-//	ft_putendl(v->p2);
 }
 
 void		get_players_vm(t_visu *v)

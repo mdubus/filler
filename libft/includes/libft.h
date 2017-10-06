@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 13:36:56 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/30 14:10:59 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:57:32 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ typedef struct			s_gnl
 }						t_gnl;
 
 int						get_next_line(const int fd, char **line);
+int						get_next_line_backslash(const int fd, char **line);
 
 /*
 ********************************** FT_PRINTF  **********************************
@@ -356,14 +357,5 @@ void					do_parsing(char *str, int nb_arg, t_f **cr,
 */
 
 void					recup_argument(t_f *cr);
-
-
-
-/*
-** OTHER
-*/
-
-
-int			get_next_line_backslash(const int fd, char **line);
 
 #endif

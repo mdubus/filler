@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:18:17 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 11:33:21 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 10:44:37 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-#pragma GCC diagnostic error "-Weverything"
 
 void	stock_links(t_visu *v, t_v **t, t_v *begin)
 {
@@ -34,18 +33,9 @@ void	stock_links(t_visu *v, t_v **t, t_v *begin)
 	(*t)->prev = NULL;
 	while (v->status != 2)
 	{
-//	ft_putendl("ENTER HERE");
-//		ft_printf("%d", v->status);
 		if (v->status != 1)
-		{
-	//		printf(" STOCK LINK !\n");
 			stock_link(&v, t, begin);
-		}
 		else
-		{
-	//		ft_putendl("TEST");
 			v->status = 0;
-		}
 	}
-//	ft_putendl("COUCOU");
 }
