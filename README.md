@@ -17,12 +17,12 @@ The aim of the game is to put more pieces on the map than the ennemy.
 
 On big maps it's difficult to see what is really happening.
 
-A visualizer made with the SDL2 helps us to understand what's happening.
+A visualizer made with the SDL2 helps us to understand what's happening. Use the left and right arrows of your keyboard to see it. 
 
 ## Algorithm
 
 On the begining of each turn, a Heat Map is created. It represents the Map of the game. 
-Values are assigned on each case of the map. It starts from the position of the ennemy and is incremented until it reaches one of my pieces or the board edges :
+Values are assigned on each case of the map. It starts from the position of the ennemy and is incremented until it reaches the board edges :
 
 ![alt text](https://github.com/mdubus/filler/blob/master/img/heat-map.png)
 
@@ -38,6 +38,7 @@ The smaller the score is, the best it is, because it will get closer of the enne
 ## Prerequisites
 
 `brew install SDL2`
+
 `brew install SDL2_ttf`
 
 If brew isn't installed, compile the project with the sources (don't forget to change the Makefile).
