@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 11:09:43 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 11:10:55 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 20:11:52 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void			case_loop_false(t_visu *v);
 void			draw_result(t_v **begin, t_visu *v);
 void			put_background(t_visu *v, t_v *begin);
 void			check_for_piece(t_v *begin, t_visu *v);
+void			parse_line_stock_map(t_visu *v, t_v *begin, t_v **t, int *i);
 
 #endif

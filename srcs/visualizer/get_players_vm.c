@@ -6,34 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 18:22:10 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 10:44:00 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 19:15:09 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-
-void		get_player_name_vm(char *line, char **player)
-{
-	char	**tab;
-	char	**tab2;
-	int		i;
-	int		j;
-
-	tab = NULL;
-	tab2 = NULL;
-	i = 0;
-	j = 0;
-	tab = ft_strsplit(line, '/');
-	while (ft_strstr(tab[i], ".filler") == 0)
-		i++;
-	tab2 = ft_strsplit(tab[i], '.');
-	while (ft_strstr(tab2[j], "filler") == 0)
-		j++;
-	*player = ft_strdup(tab2[j - 1]);
-	free(line);
-	ft_free_tab_char(&tab);
-	ft_free_tab_char(&tab2);
-}
 
 void		get_p1_vm(char *line, t_visu **v)
 {

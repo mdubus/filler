@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 15:39:52 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 12:05:54 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 21:26:44 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static void	free_tab(t_filler *f)
+void		free_tab(t_filler *f)
 {
 	int		i;
 

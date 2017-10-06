@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:39:52 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 11:47:50 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 21:35:32 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,38 @@ static int	stock_line(t_filler *f, int i, char *temp)
 			free(temp);
 		if (free_maps(f) == 0)
 			return (1);
+		return (1);
 	}
 	return (0);
+}
+
+static int	parse_piece(t_filler *f, char *temp)
+{
+	if (ft_strstr(temp, "*") == 0 && ft_strstr(temp, ".") == 0)
+	{
+		free_maps(f);
+		free(temp);
+		return (1);
+	}
+	f->piece = ft_strsplit(temp, '\n');
+	if (f->piece == NULL)
+	{
+		free(temp);
+		free_maps(f);
+		return (1);
+	}
+	return (0);
+}
+
+static void	check_temp(char **temp, t_filler *f)
+{
+	if (*temp == NULL)
+	{
+		*temp = ft_strdup(f->line);
+		free(f->line);
+	}
+	else
+		*temp = ft_strjoin_proper(*temp, 1, f->line, 1);
 }
 
 int			stock_piece(t_filler *f)
@@ -40,16 +70,16 @@ int			stock_piece(t_filler *f)
 	{
 		if (stock_line(f, i, temp) == 1)
 			return (1);
-		if (temp == NULL)
-		{
-			temp = ft_strdup(f->line);
-			free(f->line);
-		}
-		else
-			temp = ft_strjoin_proper(temp, 1, f->line, 1);
+		check_temp(&temp, f);
 		i++;
 	}
-	f->piece = ft_strsplit(temp, '\n');
-	free(temp);
+	if (temp)
+	{
+		if (parse_piece(f, temp) == 1)
+			return (1);
+		free(temp);
+	}
+	else
+		return (1);
 	return (0);
 }

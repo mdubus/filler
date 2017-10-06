@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 11:11:24 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 10:52:06 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 20:11:19 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@ static void	pass_piece(char **line, t_visu *v, t_v *begin)
 	int		i;
 	int		nb_y;
 
+	nb_y = 0;
 	tab = ft_strsplit(*line, ' ');
+	if (!tab)
+		free_linked_list(v, *line, begin);
 	i = 0;
-	nb_y = ft_atoi(tab[1]);
+	if (tab[1])
+		nb_y = ft_atoi(tab[1]);
+	else
+		free_linked_list(v, *line, begin);
 	while (i <= nb_y)
 	{
 		free(*line);
@@ -59,21 +65,16 @@ static void	check_status(char **line, t_visu **v, t_v *begin,
 	}
 }
 
-static void	stock_map(t_v **t, t_visu *v, int current_player)
+static void	stock_map(t_v **t, t_visu *v, int current_player, t_v *begin)
 {
-	char	*line;
 	int		i;
 
-	line = NULL;
 	i = 0;
 	(*t)->tab = (char **)malloc(sizeof(char *) * (unsigned long)(v->nb_y + 1));
+	if (!(*t))
+		free_everything(v, begin);
 	while (i < v->nb_y)
-	{
-		get_next_line_backslash(STDIN_FILENO, &line);
-		(*t)->tab[i] = ft_strsub(line, 4, (size_t)v->nb_x);
-		i++;
-		free(line);
-	}
+		parse_line_stock_map(v, begin, t, &i);
 	(*t)->tab[i] = NULL;
 	(*t)->current_player = current_player;
 }
@@ -100,6 +101,8 @@ static void	parse_map(t_visu *v, char **line, t_v *begin, int *current_player)
 		*current_player = 1;
 	else if (ft_strstr(*line, "X") != 0)
 		*current_player = 2;
+	else
+		*current_player = 0;
 	free(*line);
 }
 
@@ -122,6 +125,6 @@ void		stock_link(t_visu **v, t_v **t, t_v *begin)
 		(*t)->next->prev = *t;
 		*t = (*t)->next;
 		(*t)->next = NULL;
-		stock_map(t, *v, current_player);
+		stock_map(t, *v, current_player, begin);
 	}
 }

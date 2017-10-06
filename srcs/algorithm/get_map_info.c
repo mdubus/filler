@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 12:15:21 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 12:09:26 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 17:50:35 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,21 @@ static int	parse_line(t_filler *f, int i)
 	if (ft_nb_occur_char_in_str(f->line, " ") != 1)
 	{
 		while (i > 0)
-			free(f->map[i--]);
+			free(f->map[--i]);
 		free(f->line);
 		return (1);
 	}
 	if (ft_strlen(f->line) != (size_t)f->w_board + 5)
 	{
 		while (i > 0)
-			free(f->map[i--]);
+			free(f->map[--i]);
+		free(f->line);
+		return (1);
+	}
+	if (f->line[3] != ' ')
+	{
+		while (i > 0)
+			free(f->map[--i]);
 		free(f->line);
 		return (1);
 	}
@@ -45,7 +52,7 @@ int			stock_current_map(t_filler *f)
 			if (ret == 0)
 				free(f->line);
 			while (i > 0)
-				free(f->map[i--]);
+				free(f->map[--i]);
 			return (1);
 		}
 		if (parse_line(f, i) == 1)
@@ -83,12 +90,19 @@ int			get_map_info(t_filler *f)
 		return (1);
 	f->tab = ft_strsplit(f->line, ' ');
 	free(f->line);
+	if (!f->tab)
+		return (1);
 	if (compare_return_error("Plateau", f->tab[0], f->tab) == 1)
 		return (1);
 	f->h_board = ft_atoi(f->tab[1]);
 	f->w_board = ft_atoi(f->tab[2]);
+	if (f->h_board <= 0 || f->w_board <= 0)
+	{
+		ft_free_tab_char(&f->tab);
+		return (1);
+	}
 	f->map = (char **)malloc(sizeof(char*) * ((unsigned long)f->h_board + 1));
-	if (get_next_line_backslash(STDIN_FILENO, &f->line) != 1)
+	if (get_next_line_backslash(STDIN_FILENO, &f->line) != 1 || !f->map)
 	{
 		free(f->line);
 		ft_free_tab_char(&f->tab);

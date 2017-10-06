@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 13:25:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 10:43:56 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 19:25:29 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@ static void	free_board_infos(t_v **t, t_visu *v, char *line)
 	free(*t);
 	ft_putstr_fd("Board problem\n", STDERR_FILENO);
 	exit(1);
+}
+
+static void	parse_board_line(char *line, t_visu *v, t_v **t, char ***tab)
+{
+	if (ft_strstr(line, "Plateau") == 0)
+		free_board_infos(t, v, line);
+	if (ft_nb_occur_char_in_str(line, " ") != 2)
+		free_board_infos(t, v, line);
+	*tab = ft_strsplit(line, ' ');
+	if (!*tab)
+		free_board_infos(t, v, line);
+	v->nb_y = ft_atoi((*tab)[1]);
+	v->nb_x = ft_atoi((*tab)[2]);
+	if (v->nb_y <= 0 || v->nb_x <= 0)
+	{
+		ft_free_tab_char(tab);
+		free_board_infos(t, v, line);
+	}
 }
 
 void		get_board_infos(t_v **t, t_visu *v)
@@ -40,11 +58,7 @@ void		get_board_infos(t_v **t, t_visu *v)
 		if (ret != 1)
 			free_board_infos(t, v, line);
 	}
-	if (ft_strstr(line, "Plateau") == 0)
-		free_board_infos(t, v, line);
-	tab = ft_strsplit(line, ' ');
-	v->nb_y = ft_atoi(tab[1]);
-	v->nb_x = ft_atoi(tab[2]);
+	parse_board_line(line, v, t, &tab);
 	free(line);
 	ft_free_tab_char(&tab);
 	get_next_line_backslash(STDIN_FILENO, &line);

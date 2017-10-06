@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 19:20:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/09/23 15:21:06 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 16:20:59 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			search_next_star(t_filler *f, int *i, int *j)
 {
 	if (flag_star(f, i, j) == 0)
 		return (0);
-	if (*i == 0 && *j == 0 && f->piece[*j][*i] == '*')
+	if (*i == 0 && *j == 0 && f->piece && f->piece[*j][*i] == '*')
 	{
 		f->flag_star = 1;
 		return (1);
@@ -45,7 +45,7 @@ int			search_next_star(t_filler *f, int *i, int *j)
 		{
 			while (*i < f->w_piece)
 			{
-				if (f->piece[*j][*i] == '*')
+				if (f->piece && f->piece[*j][*i] == '*')
 				{
 					f->flag_star = 1;
 					return (1);

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:51:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 12:02:49 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 21:26:42 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void			print_map(t_filler *f);
 int				stock_current_map(t_filler *f);
 int				get_map_info(t_filler *f);
 void			print_heat_map(t_filler *f);
-void			create_heat_map(t_filler *f);
+int				create_heat_map(t_filler *f);
 void			init_heat_map(t_filler *f);
 void			do_heat_map(t_filler *f);
 int				get_piece(t_filler *f);
@@ -73,5 +73,6 @@ void			free_all(t_filler *f);
 void			free_tab_char(char ***tab);
 void			resolve(t_filler *f);
 int				free_maps(t_filler *f);
+void			free_tab(t_filler *f);
 
 #endif

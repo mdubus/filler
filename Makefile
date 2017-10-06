@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/10/06 11:01:48 by mdubus           ###   ########.fr        #
+#    Updated: 2017/10/06 20:11:33 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC_ALGO	=	main.c init_struct_filler.c free.c get_player_info.c\
 SRC_VISU	=	main.c get_players_vm.c init.c useful.c get_board_infos.c\
 				get_result.c stock_link.c stock_links.c get_screen_dimensions.c\
 				write_players.c write_filler.c put_grid.c draw_rect.c free.c\
-				put_result.c who_wins.c loop.c check_for_piece.c
+				put_result.c who_wins.c loop.c check_for_piece.c\
+				get_player_name_vm.c parse_line_stock_map.c
 
 OBJ_ALGO	=	$(SRC_ALGO:.c=.o)
 OBJ_VISU	=	$(SRC_VISU:.c=.o)
