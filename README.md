@@ -17,7 +17,7 @@ The aim of the game is to put more pieces on the map than the ennemy.
 
 On big maps it's difficult to see what is really happening.
 
-A visualizer made with the SDL2 helps us to understand what's happening.
+A visualizer made with the SDL2 helps us to understand what's happening. Use the left and right arrows of your keyboard to see it. 
 
 ## Algorithm
 
