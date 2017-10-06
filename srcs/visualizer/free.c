@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 14:53:08 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 11:05:06 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 11:27:09 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	free_all_visu(t_v *begin, t_visu *v, const char *s)
 	while (begin->tab[i] != NULL)
 		free(begin->tab[i++]);
 	free(begin);
-	ft_putendl(s);
 	exit(1);
 }
 
