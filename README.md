@@ -38,6 +38,7 @@ The smaller the score is, the best it is, because it will get closer of the enne
 ## Prerequisites
 
 `brew install SDL2`
+
 `brew install SDL2_ttf`
 
 If brew isn't installed, compile the project with the sources (don't forget to change the Makefile).
