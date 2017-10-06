@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:38:31 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 20:30:29 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 11:50:44 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static void	get_w_h_piece(t_filler *f)
+static int	get_w_h_piece(t_filler *f)
 {
 	char	**tab;
 
@@ -21,16 +21,17 @@ static void	get_w_h_piece(t_filler *f)
 	free(f->line);
 	if (ft_strcmp("Piece", tab[0]) != 0)
 	{
-		free_maps(f);
 		ft_free_tab_char(&tab);
-		exit(1);
+		if (free_maps(f) == 1)
+			return (1);
 	}
 	f->h_piece = ft_atoi(tab[1]);
 	f->w_piece = ft_atoi(tab[2]);
 	ft_free_tab_char(&tab);
+	return (0);
 }
 
-void		get_piece(t_filler *f)
+int			get_piece(t_filler *f)
 {
 	int		ret;
 
@@ -39,12 +40,16 @@ void		get_piece(t_filler *f)
 	{
 		if (ret == 0)
 			free(f->line);
-		free_maps(f);
+		if (free_maps(f) == 1)
+			return (1);
 	}
 	if (ft_nb_occur_char_in_str(f->line, " ") != 2)
 	{
 		free(f->line);
-		free_maps(f);
+		if (free_maps(f) == 1)
+			return (1);
 	}
-	get_w_h_piece(f);
+	if (get_w_h_piece(f) == 1)
+		return (1);
+	return (0);
 }

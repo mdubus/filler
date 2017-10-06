@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:39:52 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 20:54:00 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 11:47:50 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static void	stock_line(t_filler *f, int i, char *temp)
+static int	stock_line(t_filler *f, int i, char *temp)
 {
 	int	ret;
 
@@ -23,11 +23,13 @@ static void	stock_line(t_filler *f, int i, char *temp)
 			free(f->line);
 		if (i > 0)
 			free(temp);
-		free_maps(f);
+		if (free_maps(f) == 0)
+			return (1);
 	}
+	return (0);
 }
 
-void		stock_piece(t_filler *f)
+int			stock_piece(t_filler *f)
 {
 	int		i;
 	char	*temp;
@@ -36,7 +38,8 @@ void		stock_piece(t_filler *f)
 	temp = NULL;
 	while (i < f->h_piece)
 	{
-		stock_line(f, i, temp);
+		if (stock_line(f, i, temp) == 1)
+			return (1);
 		if (temp == NULL)
 		{
 			temp = ft_strdup(f->line);
@@ -48,4 +51,5 @@ void		stock_piece(t_filler *f)
 	}
 	f->piece = ft_strsplit(temp, '\n');
 	free(temp);
+	return (0);
 }

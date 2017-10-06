@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 15:26:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/05 19:17:12 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/06 12:07:02 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static void	get_player_line(char **line)
+static int	get_player_line(char **line)
 {
 	int	ret;
 
@@ -21,24 +21,37 @@ static void	get_player_line(char **line)
 	{
 		if (ret == 0)
 			free(*line);
-		exit(1);
+		return (1);
 	}
 	if (ft_nb_occur_char_in_str(*line, " ") != 4)
 	{
 		free(*line);
-		exit(1);
+		return (1);
 	}
+	return (0);
 }
 
-void		get_player_info(t_filler *f, char *line)
+static int	parse_line_player(t_filler *f)
 {
-	get_player_line(&line);
+	if (compare_return_error("$$$", f->tab[0], f->tab) == 1)
+		return (1);
+	if (compare_return_error("exec", f->tab[1], f->tab) == 1)
+		return (1);
+	if (compare_return_error(":", f->tab[3], f->tab) == 1)
+		return (1);
+	if (compare_return_error("[./mdubus.filler]\n", f->tab[4], f->tab) == 1)
+		return (1);
+	return (0);
+}
+
+int			get_player_info(t_filler *f, char *line)
+{
+	if (get_player_line(&line) == 1)
+		return (1);
 	f->tab = ft_strsplit(line, ' ');
 	free(line);
-	compare_return_error("$$$", f->tab[0], f->tab);
-	compare_return_error("exec", f->tab[1], f->tab);
-	compare_return_error(":", f->tab[3], f->tab);
-	compare_return_error("[./mdubus.filler]\n", f->tab[4], f->tab);
+	if (parse_line_player(f) == 1)
+		return (1);
 	if (ft_strcmp(f->tab[2], "p1") == 0)
 	{
 		f->letter_me = 'O';
@@ -52,7 +65,8 @@ void		get_player_info(t_filler *f, char *line)
 	else
 	{
 		ft_free_tab_char(&f->tab);
-		exit(1);
+		return (1);
 	}
 	ft_free_tab_char(&f->tab);
+	return (0);
 }
