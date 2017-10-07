@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 15:26:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 17:18:21 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/07 09:51:59 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int			get_player_info(t_filler *f, char *line)
 		return (1);
 	if (parse_line_player(f) == 1)
 		return (1);
-	if (ft_strcmp(f->tab[2], "p1") == 0)
+	if (f->tab[2] && ft_strcmp(f->tab[2], "p1") == 0)
 	{
 		f->letter_me = 'O';
 		f->letter_ennemy = 'X';
 	}
-	else if (ft_strcmp(f->tab[2], "p2") == 0)
+	else if (f->tab[2] && ft_strcmp(f->tab[2], "p2") == 0)
 	{
 		f->letter_me = 'X';
 		f->letter_ennemy = 'O';

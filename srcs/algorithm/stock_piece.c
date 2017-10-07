@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 11:39:52 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 21:35:32 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/07 10:18:40 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static int	stock_line(t_filler *f, int i, char *temp)
 
 static int	parse_piece(t_filler *f, char *temp)
 {
+	int	i;
+
+	i = 0;
 	if (ft_strstr(temp, "*") == 0 && ft_strstr(temp, ".") == 0)
 	{
 		free_maps(f);
@@ -40,6 +43,14 @@ static int	parse_piece(t_filler *f, char *temp)
 	}
 	f->piece = ft_strsplit(temp, '\n');
 	if (f->piece == NULL)
+	{
+		free(temp);
+		free_maps(f);
+		return (1);
+	}
+	while (f->piece[i] != NULL)
+		i++;
+	if (i != f->h_piece)
 	{
 		free(temp);
 		free_maps(f);

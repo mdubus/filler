@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 12:15:21 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 17:50:35 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/07 10:12:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int			stock_current_map(t_filler *f)
 
 	i = 0;
 	ret = -1;
+	free(f->line);
 	while (i < f->h_board)
 	{
 		if ((ret = get_next_line_backslash(STDIN_FILENO, &f->line)) != 1)
@@ -96,19 +97,16 @@ int			get_map_info(t_filler *f)
 		return (1);
 	f->h_board = ft_atoi(f->tab[1]);
 	f->w_board = ft_atoi(f->tab[2]);
-	if (f->h_board <= 0 || f->w_board <= 0)
-	{
-		ft_free_tab_char(&f->tab);
-		return (1);
-	}
-	f->map = (char **)malloc(sizeof(char*) * ((unsigned long)f->h_board + 1));
-	if (get_next_line_backslash(STDIN_FILENO, &f->line) != 1 || !f->map)
-	{
-		free(f->line);
-		ft_free_tab_char(&f->tab);
-		return (1);
-	}
-	free(f->line);
 	ft_free_tab_char(&f->tab);
+	if (f->h_board <= 0 || f->w_board <= 0)
+		return (1);
+	f->map = (char **)malloc(sizeof(char*) * ((unsigned long)f->h_board + 1));
+	if (!f->map)
+		return (1);
+	if (get_next_line_backslash(STDIN_FILENO, &f->line) != 1)
+	{
+		free(f->map);
+		return (1);
+	}
 	return (0);
 }
