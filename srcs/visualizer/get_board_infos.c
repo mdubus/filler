@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 13:25:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 19:25:29 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/07 10:37:37 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,18 @@ static void	free_board_infos(t_v **t, t_visu *v, char *line)
 
 static void	parse_board_line(char *line, t_visu *v, t_v **t, char ***tab)
 {
+	int	i;
+
+	i = 0;
 	if (ft_strstr(line, "Plateau") == 0)
 		free_board_infos(t, v, line);
 	if (ft_nb_occur_char_in_str(line, " ") != 2)
 		free_board_infos(t, v, line);
 	*tab = ft_strsplit(line, ' ');
+	while ((*tab)[i] != NULL)
+		i++;
+	if (i != 3)
+		free_board_infos(t, v, line);
 	if (!*tab)
 		free_board_infos(t, v, line);
 	v->nb_y = ft_atoi((*tab)[1]);

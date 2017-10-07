@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 11:15:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/06 21:23:13 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/10/07 10:43:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ static void	parse_result_line(t_visu **v, t_v *begin, char **tab)
 		free_everything(*v, begin);
 }
 
+static void	get_result_p2(t_visu **v, char **line, t_v *begin, char **tab)
+{
+	if (get_next_line_backslash(STDIN_FILENO, line) != 1)
+		free_linked_list(*v, *line, begin);
+	tab = ft_strsplit(*line, ' ');
+	free(*line);
+	if (!tab)
+		free_everything(*v, begin);
+	parse_result_line(v, begin, tab);
+	if (ft_strstr(tab[1], "X") != 0)
+		(*v)->resultp2 = ft_atoi(tab[3]);
+	else
+		(*v)->resultp1 = ft_atoi(tab[3]);
+	ft_free_tab_char(&tab);
+}
+
 void		get_results(char **line, t_visu **v, t_v *begin)
 {
 	char	**tab;
@@ -41,15 +57,5 @@ void		get_results(char **line, t_visu **v, t_v *begin)
 		(*v)->resultp2 = ft_atoi(tab[3]);
 	ft_free_tab_char(&tab);
 	if (ft_strstr((*v)->p2, "aucun") == 0)
-	{
-		if (get_next_line_backslash(STDIN_FILENO, line) != 1)
-			free_linked_list(*v, *line, begin);
-		tab = ft_strsplit(*line, ' ');
-		if (ft_strstr(tab[1], "X") != 0)
-			(*v)->resultp2 = ft_atoi(tab[3]);
-		else
-			(*v)->resultp1 = ft_atoi(tab[3]);
-		free(*line);
-		ft_free_tab_char(&tab);
-	}
+		get_result_p2(v, line, begin, tab);
 }
