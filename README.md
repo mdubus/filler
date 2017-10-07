@@ -35,6 +35,10 @@ The smaller the score is, the best it is, because it will get closer of the enne
 
 ![alt text](https://github.com/mdubus/filler/blob/master/img/mdubus-filler-ecole-42.gif)
 
+Algorithm fight can also lead to beautiful fights. See an exemple in video by clicking here :
+
+[![Watch the video](https://i.ytimg.com/vi/UcGA-NssVWs/2.jpg)](https://youtu.be/UcGA-NssVWs)
+
 ## Prerequisites
 
 `brew install SDL2`
